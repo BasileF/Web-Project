@@ -18,7 +18,13 @@ const LandingPage: React.FC<LandingPageProps> = ({
   const [nominations, setNominations] = useState(initialNominations);
 
   return (
-    <Grid container justify="center">
+    <Grid
+      container
+      justify="center"
+      style={{
+        padding: "5%",
+      }}
+    >
       <Search setResults={setResults} />
       <Results results={results} setResults={setResults} />
       <Nominations nominations={nominations} setNominations={setNominations} />
