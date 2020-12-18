@@ -2,12 +2,14 @@ import React from "react";
 import { Grid, InputBase, Paper } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { createStyles, withStyles, WithStyles } from "@material-ui/styles";
+import { searchApi } from "../api/search";
 
 const styles = (theme: any) =>
   createStyles({
     root: {
       display: "flex",
       alightItems: "center",
+      margin: 5,
     },
     input: {
       marginLeft: 10,
@@ -38,15 +40,8 @@ class Search extends React.Component<SearchProps, SearchState> {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  search(title: String) {
-    this.props.setResults([
-      {
-        title,
-        year: 1999,
-        imdb: "tmp",
-        poster: "poster",
-      },
-    ]);
+  async search(title: string) {
+    this.props.setResults(await searchApi(title));
   }
 
   handleChange(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
@@ -62,7 +57,7 @@ class Search extends React.Component<SearchProps, SearchState> {
   render() {
     const { classes } = this.props;
     return (
-      <Grid item xs={10} sm={5}>
+      <Grid item xs={10} sm={8}>
         <Paper square className={classes.root}>
           <SearchIcon className={classes.icon} />
           <InputBase
