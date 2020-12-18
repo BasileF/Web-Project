@@ -20,14 +20,14 @@ const LandingPage: React.FC<LandingPageProps> = ({
   return (
     <Grid
       container
-      justify="center"
       style={{
         padding: "5%",
+        backgroundColor: "lightgray",
       }}
     >
       <Search setResults={setResults} />
-      <Results results={results} setResults={setResults} />
       <Nominations nominations={nominations} setNominations={setNominations} />
+      <Results results={results} setResults={setResults} />
     </Grid>
   );
 };

@@ -9,7 +9,7 @@ interface NominationsProps {
 
 const Nominations: React.FC<NominationsProps> = (props) => {
   return (
-    <Grid item xs={12} sm={5}>
+    <Grid item xs={12} sm={3} style={{ height: "200px" }}>
       Nominations
     </Grid>
   );
