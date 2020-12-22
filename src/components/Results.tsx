@@ -4,18 +4,46 @@ import { IMovie } from "../interfaces/common";
 import Movie from "./Movie";
 
 interface ResultsProps {
-  setResults: any;
+  setNominations: any;
   results: IMovie[];
+  nominations: IMovie[];
 }
 
-const Results: React.FC<ResultsProps> = (props) => {
-  return (
-    <Grid container item xs={12} sm={8}>
-      {props.results.map((res) => (
-        <Movie {...res} />
-      ))}
-    </Grid>
-  );
-};
+class Results extends React.Component<ResultsProps> {
+  constructor(props: ResultsProps) {
+    super(props);
+
+    this.isNominated = this.isNominated.bind(this);
+    this.addNomination = this.addNomination.bind(this);
+  }
+
+  isNominated(t: IMovie) {
+    return (
+      this.props.nominations.some(
+        (nominee) => JSON.stringify(nominee) === JSON.stringify(t)
+      ) || this.props.nominations.length === 5
+    );
+  }
+
+  addNomination(t: IMovie) {
+    const next = this.props.nominations.slice();
+    next.push(t);
+    this.props.setNominations(next);
+  }
+
+  render() {
+    return (
+      <Grid container item xs={12} sm={8}>
+        {this.props.results.map((res) => (
+          <Movie
+            {...res}
+            addNomination={this.addNomination}
+            isNominated={this.isNominated}
+          />
+        ))}
+      </Grid>
+    );
+  }
+}
 
 export default Results;
