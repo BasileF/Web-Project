@@ -43,7 +43,10 @@ const useStyles = makeStyles({
   },
 });
 
-interface MovieProps extends IMovie {}
+interface MovieProps extends IMovie {
+  isNominated: any;
+  addNomination: any;
+}
 
 const Movie: React.FC<MovieProps> = (props) => {
   const { title, year, imdb, poster } = props;
@@ -66,7 +69,12 @@ const Movie: React.FC<MovieProps> = (props) => {
             View IMDB
           </Button>
         </Link>
-        <Button fullWidth className={classes.nominate}>
+        <Button
+          fullWidth
+          className={classes.nominate}
+          onClick={() => props.addNomination(props)}
+          disabled={props.isNominated(props)}
+        >
           Nominate
         </Button>
       </Card>

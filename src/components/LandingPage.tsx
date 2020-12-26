@@ -27,7 +27,11 @@ const LandingPage: React.FC<LandingPageProps> = ({
     >
       <Search setResults={setResults} />
       <Nominations nominations={nominations} setNominations={setNominations} />
-      <Results results={results} setResults={setResults} />
+      <Results
+        results={results}
+        nominations={nominations}
+        setNominations={setNominations}
+      />
     </Grid>
   );
 };
